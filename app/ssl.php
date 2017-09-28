@@ -16,9 +16,6 @@ function is_ssl()
     } else if (isset($_SERVER['SERVER_PORT']) &&
         '443' == $_SERVER['SERVER_PORT']) {
         return true;
-    } else if (isset($_SERVER['HTTP_X_FORWARDED_PORT']) &&
-        '443' == $_SERVER['SERVER_PORT']) {
-        return true;
     }
 
     return false;
