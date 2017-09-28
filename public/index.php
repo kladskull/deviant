@@ -32,7 +32,7 @@ if (isset($_SERVER['REQUEST_URI'])) {
 // get requested page, sanitize input
 $page = 'index';
 if (count($page_request) > 1 && !empty($page)) {
-    $page = filter_url(strtolower(trim($page_request[1])));
+    $page = filter_page_request(strtolower(trim($page_request[1])));
 }
 
 /* add random data to response

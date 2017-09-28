@@ -17,6 +17,5 @@ function is_ssl()
         '443' == $_SERVER['SERVER_PORT']) {
         return true;
     }
-
     return false;
 }
