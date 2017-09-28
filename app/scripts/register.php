@@ -56,10 +56,10 @@ if (!isset($_POST['inputEmail'])) {
             DB::insert(TB_USER, [
                 'email_address' => $email,
                 'password' => password_hash($password, PASSWORD_DEFAULT),
-                'user_guid' => hash('sha512', uniqid('HSV', true) . '-' . random_bytes(32) . '-' . openssl_random_pseudo_bytes(64) . '-' . random_int(PHP_INT_MIN, PHP_INT_MAX)),
+                'user_guid' => uuidv4(),
                 'date_created' => new DateTime('now'),
                 'locked' => false,
-                'signature' => 'SIGN', //todo: hash email+gui+date_created with HSM
+                //'signature' => 'SIGN', //todo: hash email+gui+date_created with HSM
                 'admin' => true,
             ]);
 
