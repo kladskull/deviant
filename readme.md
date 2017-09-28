@@ -67,6 +67,10 @@ Initially, its going to be a little more difficult than you'd hope
 for, as there is no documentation. If you're looking to contribute 
 to something on the ground floor, this is your time to shine!
 
+## Unit Tests
+This is a very big priority for me, and I will be starting them
+as I convert things over to objects.
+
 ## Documentation
 See above 'Learning PSW'
 
