@@ -1,0 +1,14 @@
+# IDE's
+.idea/
+
+# composer
+vendor/
+composer.lock
+
+# dot_env
+.env
+.env.*
+
+# smarty
+app/templates/cache/*.php
+app/templates/templates_c/*.php
