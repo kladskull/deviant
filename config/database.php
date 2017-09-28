@@ -10,5 +10,3 @@ DB::$encoding = getenv('utf8');
 
 // tables
 define('TB_USER', 'user');
-define('TB_BLADES', 'blades');
-define('TB_PROVISIONING', 'provisioning');
