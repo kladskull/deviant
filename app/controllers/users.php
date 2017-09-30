@@ -11,7 +11,12 @@ class UsersController extends Controller
     public function __construct()
     {
         parent::__construct();
-        //$this->middleware('admin');
+
+        // require an authenticated user
+        $this->middleware->require('auth');
+
+        // require an administrator
+        $this->middleware->require('admin');
     }
 
     public function get()

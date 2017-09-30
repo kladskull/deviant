@@ -9,10 +9,12 @@
 class Controller
 {
     protected $view;
+    protected $middleware;
 
     public function __construct()
     {
         $this->view = new View();
+        $this->middleware = new Middleware();
     }
 
 }
