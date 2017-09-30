@@ -10,6 +10,11 @@ mature enough to be used in a production environment.
 You'll also notice the lack of documentation, which is being
 worked on.
 
+## Requirements
+- Minimum of PHP 7.1
+- MariaDB or MySQL Server
+- Composer
+
 ## Installation
 Ensure that you have composer installed, clone the repository, and
 do a composer install. All of your templates go in 
