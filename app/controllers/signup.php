@@ -73,6 +73,11 @@ class SignupController extends Controller
             $user->email_address = $emailAddress;
             $user->password = password_hash($password, PASSWORD_DEFAULT);
 
+            // first user will be granted administration privileges. This
+            // may change going forward.
+            if ($user->count() <= 0) {
+                $user->admin = 1;
+            }
 
             $user->create();
 

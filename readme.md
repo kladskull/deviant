@@ -1,64 +1,44 @@
 <p align="center">PSF - Security Focussed Boilerplate [Framework]</p>
 
 ## About PSF
-The name WILL change, but until something strikes me, this is
-the working name. PSF is a PHP Boilerplate that has been designed 
+The name may change, but until something strikes me, this is
+the working name. PSF is a PHP Framework that has been designed 
 from the ground up to be secure.
 
 ## What to Expect
-Because this is a newer project, expect that it
-is not mature enough to be used in any production environment.
-Being in an early phase, you'll also notice the lack of 
-documentation, which I am working on.
+Because this is a newer project, expect that it may not be
+mature enough to be used in a production environment.
+You'll also notice the lack of documentation, which is being
+worked on.
 
-I aim to resolve all of this, as well as encapsulate some of the 
-code in objects, and use some proper design methodologies.
+The aim is to resolve all of these starting pains, and use 
+some proper design methodologies going forward.
 
 ## Installation
 Ensure that you have composer installed, clone the repository, and
 do a composer install. All of your templates go in 
 /app/templates/ and all of your pages go into /app/scripts. Currently
-we only support Smarty. Once we become more mature, we'll be deciding
-on a template library, or adding the ability to use others.
+we only support Smarty. If you have any issues, take a loot at some of 
+the base project, specifically `/app/controllers/login.php' and its template
+'/app/templates/login.tpl'.
 
 You will also need to copy `/env_example` to `/.env` and modify the 
 contents to your server configuration. 
 
-Any helper libraries you create can reside in /app/. Be sure to add the
-includes to /app/config/includes.php. Also note table names are defined
-as const variables in /app/config/database.php. The idea behind this is
-to be better ready for hot migrations going forward.
+Be sure to add any includes to the bootstrap in `/app/bootstrap.php`. This
+will defintely change going forward, so make sure to heavily comment.
 
 The schema can be found in /app/database/ - run it on your MySQL Database.
 
-You should run `/fix_perms.sh` after any modifications to the code on
-your server.
-
-You should add the following to an .htaccess file in the root, or better
-inside your apache configuration.
-
-~~~~
-RewriteEngine On
-RewriteBase /
-RewriteRule ^(.*)/$ /$1 [L,R=301]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ /index.php [L,QSA]
-~~~~
+If your permissions get messed up, you can always run 
+`/fix_perms.sh`.
 
 ## Post Installation
-Visit yoursite.com/register - this will allow you to become an 
-administrator. Further registration will have to be done from 
-yoursite.com/signup. Currently any sign-ups have to be approved
+Visit yoursite.com/signup - this will allow you to become an 
+administrator. Any registrations that follow will have to be `unlocked`
+in the administrator/users menu. Currently any sign-ups have to be approved
 by the administrator. This will be a config option going forward,
 but for now, its just the way it is.
-
-## Learning PSF
-Initially, its going to be a little more difficult than you'd hope
-for, as there is no documentation.
-
-## Documentation
-Coming shortly.
 
 ## Contributing
 Thank-you for considering this. There have been no guides created 
