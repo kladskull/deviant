@@ -105,7 +105,7 @@ class Base
         // store the user who last modified the data (if it exists)
         if (isset($this->_fields['created_by'])) {
             $user_id = 0;
-            if (isset($_SESSION['user_id'])) {
+            if (!empty($_SESSION['user_id'])) {
                 $user_id = $_SESSION['user_id'];
             }
             $this->_properties['created_by'] = $user_id;
@@ -164,7 +164,7 @@ class Base
             // store the user who last modified the data (if it exists)
             if (isset($this->_fields['modified_by'])) {
                 $user_id = 0;
-                if (isset($_SESSION['user_id'])) {
+                if (!empty($_SESSION['user_id'])) {
                     $user_id = $_SESSION['user_id'];
                 }
                 $this->_properties['modified_by'] = $user_id;

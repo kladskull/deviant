@@ -32,7 +32,7 @@ class Headers
     public function getHeader(string $header): string
     {
         $header_data = null;
-        if (isset($this->headers[$header])) {
+        if (!empty($this->headers[$header])) {
             $header_data = $this->headers[$header];
         }
         return $header_data;
@@ -40,8 +40,8 @@ class Headers
 
     public function removeHeader(string $header): bool
     {
-        if (isset($this->headers[$header])) {
-            unsset($this->headers[$header]);
+        if (!empty($this->headers[$header])) {
+            unset($this->headers[$header]);
         }
 
         return true;

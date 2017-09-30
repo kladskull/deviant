@@ -92,12 +92,12 @@ class HttpKernel extends Kernel
 
     public function is_ssl(): bool
     {
-        if (isset($_SERVER['HTTPS'])) {
+        if (!empty($_SERVER['HTTPS'])) {
             if ('on' == strtolower($_SERVER['HTTPS']) ||
                 '1' == $_SERVER['HTTPS']) {
                 return true;
             }
-        } else if (isset($_SERVER['SERVER_PORT']) &&
+        } else if (!empty($_SERVER['SERVER_PORT']) &&
             '443' == $_SERVER['SERVER_PORT']) {
             return true;
         }

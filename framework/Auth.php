@@ -11,7 +11,7 @@ class Auth
     public
     static function isLoggedIn(): bool
     {
-        if (isset($_SESSION['logged_in']) && true === $_SESSION['logged_in']) {
+        if (!empty($_SESSION['logged_in']) && true === $_SESSION['logged_in']) {
             return true;
         }
         return false;
@@ -104,7 +104,7 @@ class Auth
             session_regenerate_id();
 
             // unset cookies
-            if (isset($_SERVER['HTTP_COOKIE'])) {
+            if (!empty($_SERVER['HTTP_COOKIE'])) {
                 $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
                 foreach ($cookies as $cookie) {
                     $parts = explode('=', $cookie);
