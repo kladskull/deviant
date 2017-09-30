@@ -1,18 +1,14 @@
 <p align="center">PSF - Security Focussed Boilerplate [Framework]</p>
 
-## About PSF
-The name may change, but until something strikes me, this is
-the working name. PSF is a PHP Framework that has been designed 
-from the ground up to be secure.
+## About Deviant
+Deviant is a PHP Boilerplate (~Framework) that has been designed 
+from the ground up to be quick and responsive.
 
 ## What to Expect
 Because this is a newer project, expect that it may not be
 mature enough to be used in a production environment.
 You'll also notice the lack of documentation, which is being
 worked on.
-
-The aim is to resolve all of these starting pains, and use 
-some proper design methodologies going forward.
 
 ## Installation
 Ensure that you have composer installed, clone the repository, and
@@ -45,9 +41,6 @@ Thank-you for considering this. There have been no guides created
 as of yet, but if you're serious, please email me at 
 mikecurry74@gmail.com (or just start contributing!)
 
-As you can see, the code is pretty `ok` but not anything close
-to what it should be, why not pitch in?
-
 ## Security Vulnerabilities
 If you discover a security vulnerability within PSF, please send 
 an e-mail to Mike Curry at mikecurry74@gmail.com. All security 
@@ -60,5 +53,5 @@ lack of security functionality coming out of the use of this framework,
 even if we know of such vulnerability. Everything is risky in WWW!
 
 ## License
-The PSF is open-sourced software licensed under the 
+Deviant is open-sourced software licensed under the 
 [MIT license](http://opensource.org/licenses/MIT).
