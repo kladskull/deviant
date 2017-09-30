@@ -1,4 +1,4 @@
-<p align="center">PSF - Security Focussed Boilerplate [Framework]</p>
+<p align="center">Deviant - Simple, Extensible Boilerplate/Mini-Framework</p>
 
 ## About Deviant
 Deviant is a PHP Boilerplate (~Framework) that has been designed 
