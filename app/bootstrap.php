@@ -4,8 +4,14 @@
 // error reporting & security
 error_reporting(E_ALL | E_STRICT);
 
+use Symfony\Component\Dotenv\Dotenv;
+
 // vendor
 include '../vendor/autoload.php';
+
+// load environment data
+$dot_env = new Dotenv();
+$dot_env->load('../.env');
 
 // config
 include '../config/php_config.php';

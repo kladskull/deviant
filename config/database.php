@@ -9,7 +9,3 @@ DB::$password = getenv('DB_PASSWORD');
 DB::$encoding = getenv('utf8');
 DB::$error_handler = false;
 DB::$throw_exception_on_error = true;
-
-// tables
-define('TB_USER', 'user');
-define('TB_CACHE', 'cache');

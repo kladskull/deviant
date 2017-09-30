@@ -5,9 +5,3 @@
  * Date: 9/4/17
  * Time: 11:23 PM
  */
-
-use Symfony\Component\Dotenv\Dotenv;
-
-// load environment data
-$dot_env = new Dotenv();
-$dot_env->load('../.env');

@@ -11,7 +11,7 @@ class Cache
     public static function get($key, $default_value = null)
     {
         $return_value = null;
-        $record = DB::queryFullColumns('SELECT `value`, `expires` FROM ' . TB_CACHE . ' WHERE `key`=%s LIMIT 1;', $key);
+        $record = DB::queryFullColumns('SELECT `value`, `expires` FROM `cache` WHERE `key`=%s LIMIT 1;', $key);
         if (!empty($record[0])) {
             // only return data if not expired (or no expiry)
             if (time(0) < $record[0]['cache.expires'] || 0 == $record[0]['cache.expires']) {
@@ -41,7 +41,7 @@ class Cache
         }
 
         // update the record
-        DB::insertUpdate(TB_CACHE, [
+        DB::insertUpdate('cache', [
             'key' => $key,
             'value' => $value,
             'expires' => $expires,

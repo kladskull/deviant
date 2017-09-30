@@ -112,7 +112,7 @@ class Base
         }
 
         // only save if something changed
-        DB::insert(TB_USER, [
+        DB::insert('user', [
             $this->_properties
         ]);
 
