@@ -1,7 +1,7 @@
 <p align="center">Deviant - Simple, Extensible Boilerplate/Mini-Framework</p>
 
 ## About Deviant
-Deviant is a PHP Boilerplate (~Framework) that has been designed 
+Deviant is a PHP Boilerplate/mini-framework that has been designed 
 from the ground up to be quick and responsive.
 
 ## What to Expect
