@@ -1,27 +1,18 @@
-<p align="center">PSW - PHP Secure Framework</p>
+<p align="center">PSF - Security Focussed Boilerplate [Framework]</p>
 
-## About PSW
+## About PSF
 The name WILL change, but until something strikes me, this is
-the working name. PSW is a PHP framework that is has been designed 
-from the ground up in the hopes of becoming one of the most security
-aware frameworks. Some of the ideas and design come from
-a Bitcoin Exchange I was part of that had to be as secure as 
-possible.
-
-## PSW Sponsors
-We would love to become sponsored for helping fund the development of this
-project. If you or your company is interested, please contact 
-mikecurry74@gmail.com
+the working name. PSF is a PHP Boilerplate that has been designed 
+from the ground up to be secure.
 
 ## What to Expect
-Because this is a new open source project, expect that it
+Because this is a newer project, expect that it
 is not mature enough to be used in any production environment.
-Also expect that it is not as secure as it is to become. You'll
-also notice that there is not a lot of commenting or documentation.
+Being in an early phase, you'll also notice the lack of 
+documentation, which I am working on.
+
 I aim to resolve all of this, as well as encapsulate some of the 
-code in objects, and use some proper design methodologies. I'm
-also leaning a bit on the community to help me during this process
-as I am not happy with some of the code structure.
+code in objects, and use some proper design methodologies.
 
 ## Installation
 Ensure that you have composer installed, clone the repository, and
@@ -62,17 +53,12 @@ yoursite.com/signup. Currently any sign-ups have to be approved
 by the administrator. This will be a config option going forward,
 but for now, its just the way it is.
 
-## Learning PSW
+## Learning PSF
 Initially, its going to be a little more difficult than you'd hope
-for, as there is no documentation. If you're looking to contribute 
-to something on the ground floor, this is your time to shine!
-
-## Unit Tests
-This is a very big priority for me, and I will be starting them
-as I convert things over to objects.
+for, as there is no documentation.
 
 ## Documentation
-See above 'Learning PSW'
+Coming shortly.
 
 ## Contributing
 Thank-you for considering this. There have been no guides created 
@@ -83,7 +69,7 @@ As you can see, the code is pretty `ok` but not anything close
 to what it should be, why not pitch in?
 
 ## Security Vulnerabilities
-If you discover a security vulnerability within PSW, please send 
+If you discover a security vulnerability within PSF, please send 
 an e-mail to Mike Curry at mikecurry74@gmail.com. All security 
 vulnerabilities will be promptly addressed.
 
@@ -94,4 +80,5 @@ lack of security functionality coming out of the use of this framework,
 even if we know of such vulnerability. Everything is risky in WWW!
 
 ## License
-The PSW is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The PSF is open-sourced software licensed under the 
+[MIT license](http://opensource.org/licenses/MIT).

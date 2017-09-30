@@ -1,12 +1,6 @@
-<?php
+<?php declare(strict_types=1); // strict mode
 /**
  * Configuration file for CSRF Protector
- * Necessary configurations are (library would throw exception otherwise)
- * ---- logDirectory
- * ---- failedAuthAction
- * ---- jsPath
- * ---- jsUrl
- * ---- tokenLength
  */
 return [
     'CSRFP_TOKEN' => '',

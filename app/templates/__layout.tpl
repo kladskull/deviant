@@ -37,7 +37,9 @@
         </ul>
         <ul class="nav navbar-nav">
             {if $loggedIn}
-                <a class="nav-link" href="/logout">Log-out</a>
+                <form action="/logout" method="post">
+                    <button type="submit" name="logout" value="logout" class="btn btn-dark">Logout</button>
+                </form>
             {else}
                 <a class="nav-link" href="/signup">Sign-up</a>
                 <a class="nav-link" href="/login">Login</a>

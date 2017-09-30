@@ -45,7 +45,7 @@
                     <td align="center">
                         <div class="container">
                             <div class="row">
-                                {if $user['id'] !== $currentUser['id']}
+                                {if null !== $currentUser && $user['id'] !== $currentUser->id}
                                     <div style="padding-right: 5px;">
                                         <form method="post" action="/users">
                                             {if $user['locked'] == 0}
@@ -69,7 +69,7 @@
                                                 <input type="submit" class="btn btn-danger" value="- Admin">
                                             {/if}
                                         </form>
-                                    </div>
+                                    </div>`
                                 {/if}
                             </div>
                         </div>

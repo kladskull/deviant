@@ -1,5 +1,5 @@
 #!/bin/bash
-chown -R mcurry:www-data /var/www
-chmod -R a=r,u+w,a+X /var/www
-chmod 755 /var/www/html/fix_perms.sh
+chmod -R a=r,u+w,a+X .
+chmod 755 ./fix_perms.sh
+chmod 755 ./tests/run_tests
 
