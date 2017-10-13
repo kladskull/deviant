@@ -19,8 +19,7 @@ define('APP_START_TIME', round(microtime(true) * 1000));
  | can be used.                                                        |
  +---------------------------------------------------------------------+
 */
-
-include '../app/bootstrap.php';
+include __DIR__ . '/../app/bootstrap.php';
 
 /*
  +---------------------------------------------------------------------+
@@ -32,6 +31,7 @@ include '../app/bootstrap.php';
  | script.                                                             |
  +---------------------------------------------------------------------+
 */
+
 
 $httpKernel = new HttpKernel();
 
