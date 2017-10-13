@@ -13,10 +13,12 @@ include '../vendor/autoload.php';
 $dot_env = new Dotenv();
 $dot_env->load('../.env');
 
-// config
-include '../config/php_config.php';
-include '../config/app.php';
+// vendor config
 include '../config/csrf_config.php';
+
+// config
+include '../config/php.php';
+include '../config/app.php';
 include '../config/database.php';
 
 // pre-loads

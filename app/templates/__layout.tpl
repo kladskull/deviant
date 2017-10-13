@@ -6,14 +6,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
-    <title>{block name=title}PSW - PHP Secure Framework{/block}</title>
+    <title>{block name=title}My Website{/block}</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/base-template.css" rel="stylesheet">
     {block name=head}{/block}
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">{block name=page_title}PSW - PHP Secure Framework{/block}</a>
+    <a class="navbar-brand" href="#">{block name=page_title}My Website{/block}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
