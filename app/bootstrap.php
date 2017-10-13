@@ -1,6 +1,6 @@
 <?php declare(strict_types=1); // strict mode
 
-// TODO: Base on environment
+// TODO: Base error reporting on 'ENVIRONMENT' const (development,production)
 // error reporting & security
 error_reporting(E_ALL | E_STRICT);
 
