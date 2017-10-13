@@ -1,4 +1,4 @@
-<p align="center">Deviant - Simple, Extensible Boilerplate/Mini-Framework</p>
+<h2 align="center">Deviant - Simple, Extensible Boilerplate/Mini-Framework</h2>
 
 ## About Deviant
 Deviant is a PHP Boilerplate/mini-framework that has been designed 
@@ -17,7 +17,7 @@ worked on.
 
 ## Installation
 Ensure that you have composer installed, clone the repository, and
-do a composer install. All of your templates go in 
+run `composer install`. To run your project locally, use `composer start`. All of your templates go in 
 /app/templates/ and all of your pages go into /app/scripts. Currently
 we only support Smarty. If you have any issues, take a loot at some of 
 the base project, specifically `/app/controllers/login.php' and its template
