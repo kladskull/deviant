@@ -22,7 +22,10 @@ $dot_env->load(__DIR__ . '/../.env');
 
 // create a log channel
 $log = new Logger('deviant');
-$log->pushHandler(new StreamHandler(__DIR__ . '/log/deviant-' . getenv('ENVIRONMENT') . '.log', Logger::WARNING));
+$log->pushHandler(new StreamHandler(__DIR__ . '/log/app-' . getenv('ENVIRONMENT') . '.log', Logger::WARNING));
+
+// add the log to the registry
+Monolog\Registry::addLogger($log);
 
 // include configs
 Loader::includeDirectory(__DIR__ . '/../config/', []);
