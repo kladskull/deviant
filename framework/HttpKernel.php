@@ -31,7 +31,7 @@ class HttpKernel extends Kernel
 
         // TODO: process middleware
 
-        // TODO: get the controller, collect the requests and let'er rip
+        // TODO: get the controller, collect the requests and run it
 
         $this->runController();
     }

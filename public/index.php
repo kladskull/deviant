@@ -34,8 +34,6 @@ include __DIR__ . '/../app/bootstrap.php';
 
 $httpKernel = new HttpKernel();
 
-//$log = Monolog\Registry::getInstance('app');
-
 // for performance metrics
 define('APP_END_TIME', round(microtime(true) * 1000));
 

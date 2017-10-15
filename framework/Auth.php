@@ -11,11 +11,13 @@ class Auth
     public
     static function isLoggedIn(): bool
     {
+        $success = false;
+
         if (!empty($_SESSION['logged_in']) && true === $_SESSION['logged_in']) {
-            return true;
+            $success = true;
         }
 
-        return false;
+        return $success;
     }
 
     public static function login(string $emailAddress, string $password): array
@@ -29,11 +31,6 @@ class Auth
 
         // done allow anything out of specifications
         if (strlen($emailAddress) > 150) {
-            return $result;
-        }
-
-        // done allow anything out of specifications
-        if (empty($password) || strlen($password) > 255) {
             return $result;
         }
 
@@ -71,6 +68,7 @@ class Auth
                     // clean up
                     $result['success'] = true;
                     $error_message = '';
+                    Cache::set('attempts_' . $emailAddress, 0, 600);
 
                     // mitigate session high-jacking
                     session_regenerate_id();
@@ -81,10 +79,6 @@ class Auth
                     // real account.
                     session_destroy();
                 }
-
-            } else {
-                // unset everything
-                session_destroy();
             }
 
         } else {
@@ -98,25 +92,29 @@ class Auth
         return $result;
     }
 
-    public static function logout(): bool
+    public static function logout($redirect = true): bool
     {
-        if (self::isLoggedIn()) {
-            // kill it all
-            session_destroy();
-            session_regenerate_id();
+        //start session in case its not
+        if (empty(session_id())) {
+            session_start();
+        }
 
-            // unset cookies
-            if (!empty($_SERVER['HTTP_COOKIE'])) {
-                $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-                foreach ($cookies as $cookie) {
-                    $parts = explode('=', $cookie);
-                    $name = trim($parts[0]);
-                    setcookie($name, '', time() - 3600);
-                    setcookie($name, '', time() - 3600, '/');
-                }
+        // kill it all
+        session_destroy();
+
+        // unset cookies
+        if (!empty($_SERVER['HTTP_COOKIE'])) {
+            $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+            foreach ($cookies as $cookie) {
+                $parts = explode('=', $cookie);
+                $name = trim($parts[0]);
+                setcookie($name, '', time() - 3600);
+                setcookie($name, '', time() - 3600, '/');
             }
+        }
 
-            // send to home page
+        // send to home page
+        if ($redirect) {
             Http::redirect('/');
         }
 
@@ -127,11 +125,15 @@ class Auth
     {
         if (self::isLoggedIn()) {
             if (!empty($_SESSION['user_id'])) {
-                $user = new User();
-                $user->load((int)$_SESSION['user_id']);
-                if (true == $user->admin) {
-                    return true;
-                }
+                //try {
+                    $user = new User();
+                    $user->load((int)$_SESSION['user_id']);
+                    if (true == $user->admin) {
+                        return true;
+                    }
+                //} catch (Exception $ex) {
+                //    return false;
+                //}
             }
         }
 

@@ -31,15 +31,17 @@ class User extends Base
     }
 
     public
-    static function emailExists(string $email): bool
-    {
+    static function emailExists(
+        string $email
+    ): bool {
         if (Validate::emailAddress($email)) {
             // get the user record
-            $record = DB::queryFirstRow('SELECT `email_address` FROM `users` WHERE `email_address`=%s LIMIT 1;', $email);
+            $record = DB::queryFirstRow('SELECT `email_address` FROM `user` WHERE `email_address`=%s LIMIT 1;', $email);
             if ($record !== null) {
                 return true;
             }
         }
+
         return false;
     }
 

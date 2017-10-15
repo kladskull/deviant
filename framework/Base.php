@@ -90,19 +90,24 @@ class Base
         return $found;
     }
 
+    protected function getSignableData(): array
+    {
+        // get the properties, remove the actual signature for hashing
+        $serializable_properties = $this->_properties;
+        unset($serializable_properties['signature']);
+        ksort($serializable_properties);
+
+        return $serializable_properties;
+    }
+
     protected function getSignature(): string
     {
-        // update the signature
-        return hash('sha512', serialize($this->_properties));
+        // return the signature of the data
+        return hash('sha512', serialize($this->getSignableData()));
     }
 
     public function create(): bool
     {
-        // create a signature based on the data
-        if (isset($this->_fields['signature'])) {
-            $this->_properties['signature'] = $this->getSignature();
-        }
-
         // store the last modified date (if it exists)
         if (isset($this->_fields['date_created'])) {
             $this->_properties['date_created'] = new DateTime('now');
@@ -117,12 +122,27 @@ class Base
             $this->_properties['created_by'] = $user_id;
         }
 
-        // only save if something changed
+        // store record
         DB::insert('user', [
             $this->_properties
         ]);
 
-        // TODO: get status, and return t/f
+        // get created ID
+        $id = DB::insertId();
+
+        // read back the data to get defaults for integrity check
+        $this->load($id, false);
+
+        // create a signature based on the data with DB defaults
+        if (isset($this->_fields['signature'])) {
+            $this->_properties['signature'] = $this->getSignature();
+        }
+
+        // store record
+        DB::update('user', [
+            $this->_properties
+        ], 'id=%i', $id);
+
         return true;
     }
 
@@ -140,29 +160,42 @@ class Base
         return $success;
     }
 
-    public function load(int $id): bool
+    public function load(int $id, bool $checkIntegrity = true): bool
     {
+        $success = false;
+
         // load the record into the object
         $fields = DB::queryOneRow('SELECT * FROM ' . $this->_table_name . ' WHERE id=%i LIMIT 1;', $id);
-        foreach ($fields as $field_name => $field) {
-            $this->_properties[$field_name] = $field;
+        if (null !== $fields) {
+            foreach ($fields as $field_name => $field) {
+                $this->_properties[$field_name] = $field;
+            }
+
+            // check record's signature to verify data, warn if something is wrong
+            if ($checkIntegrity) {
+                $calculatedSignature = $this->getSignature();
+                if ($calculatedSignature !== $this->_properties['signature']) {
+                    $message = 'Signature mismatch, possible data tampering.';
+                    $this->logger->warning($message, [
+                        'CalculatedSignature' => $calculatedSignature,
+                        'StoredSignature'     => $this->_properties['signature'],
+                        'Fields'              => $this->_properties,
+                    ]);
+                    throw new Exception('Data integrity violation');
+                }
+            }
+
+            $success = true;
         }
 
-        // TODO: check record signature to the data, warn if something is wrong
-
-        // TODO: get status, and return t/f
-        return true;
+        // get status, and return t/f
+        return $success;
     }
 
     public function save(): bool
     {
         // only save if something changed
         if (count($this->_modified)) {
-
-            // create a signature based on the data
-            if (isset($this->_fields['signature'])) {
-                $this->_properties['signature'] = $this->getSignature();
-            }
 
             // store the last modified date (if it exists)
             if (isset($this->_fields['modified_date'])) {
@@ -176,6 +209,11 @@ class Base
                     $user_id = $_SESSION['user_id'];
                 }
                 $this->_properties['modified_by'] = $user_id;
+            }
+
+            // create a signature based on the data
+            if (isset($this->_fields['signature'])) {
+                $this->_properties['signature'] = $this->getSignature();
             }
 
             // update the record
@@ -195,7 +233,7 @@ class Base
         // load the record into the object
         $fields = DB::queryOneRow('SELECT count(1) AS `total` FROM `' . $this->_table_name . '`');
 
-        return $fields['total'];
+        return (int)$fields['total'];
     }
 
     public function getAll()

@@ -76,7 +76,8 @@ class SignupController extends Controller
             // first user will be granted administration privileges. This
             // may change going forward.
             if ($user->count() <= 0) {
-                $user->admin = 1;
+                $user->admin = true;
+                $user->locked = false;
             }
 
             $user->create();
