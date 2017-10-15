@@ -11,11 +11,16 @@ class Kernel
     protected $app_version = '0.1.0';
     protected $base_path = '';
     public $currentUser = null;
+    protected $logger = null;
 
     public function __construct()
     {
         $this->base_path = __FILE__;
 
+        // get logger instance
+        $this->_logger = Monolog\Registry::getInstance('app');
+
+        // set some user data
         if (Auth::isLoggedIn()) {
             $this->currentUser = new User();
             $this->currentUser->load((int)$_SESSION['user_id']);

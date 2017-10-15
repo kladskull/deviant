@@ -7,6 +7,7 @@ error_reporting(E_ALL | E_STRICT);
 use Symfony\Component\Dotenv\Dotenv;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Monolog\Registry;
 
 // vendor & pre-loaders
 include __DIR__ . '/../vendor/autoload.php';
@@ -17,15 +18,16 @@ include __DIR__ . '/../framework/Kernel.php';
 $dot_env = new Dotenv();
 $dot_env->load(__DIR__ . '/../.env');
 
-// create a log channel
-$log = new Logger('deviant');
-$log->pushHandler(new StreamHandler(__DIR__ . '/log/app-' . getenv('ENVIRONMENT') . '.log', Logger::WARNING));
-
-// add the log to the registry
-Monolog\Registry::addLogger($log);
-
 // include configs
 Loader::includeDirectory(__DIR__ . '/../config/');
+
+// create a log channel
+$log = new Logger('app');
+$log->pushHandler(new StreamHandler(__DIR__ . '/../app/log/app-' . getenv('ENVIRONMENT') . '.log',
+    Logger::WARNING));
+
+// Add to registry
+Registry::addLogger($log, 'app');
 
 // include underlying framework
 Loader::includeDirectory(__DIR__ . '/../framework/', [

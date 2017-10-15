@@ -10,11 +10,15 @@ class Controller
 {
     protected $view;
     protected $middleware;
+    protected $logger = null;
 
     public function __construct()
     {
         $this->view = new View();
         $this->middleware = new Middleware();
+
+        // get logger instance
+        $this->_logger = Monolog\Registry::getInstance('app');
     }
 
 }

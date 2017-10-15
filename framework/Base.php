@@ -13,6 +13,7 @@ class Base
     protected $_modified = [];
     protected $_table_name = null;
     protected $_class_name = '';
+    protected $logger = null;
 
     // constructor
     public function __construct()
@@ -20,6 +21,9 @@ class Base
         // get the `potential` table name of the child object
         $this->loadProperties(strtolower(get_class($this)));
         $this->_class_name = get_class($this);
+
+        // get logger instance
+        $this->logger = Monolog\Registry::getInstance('app');
     }
 
     // do not allow magic methods
