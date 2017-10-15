@@ -7,8 +7,7 @@
     "owasp/csrf-protector-php": "^0.2.1",
     "nikic/fast-route": "^1.2",
     "phpunit/phpunit": "^6.4",
-    "monolog/monolog": "^1.23",
-    "doctrine/orm": "^2.5"
+    "monolog/monolog": "^1.23"
   },
   "require-dev": {
     "simpletest/simpletest": "^1.1"
