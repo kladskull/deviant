@@ -37,6 +37,7 @@ class Base
         } else {
             $error_message = 'Invalid property [get: ' . $this->_class_name .
                 '] `' . $property_name . '`';
+            $this->logger->error($error_message);
             throw new Exception($error_message);
         }
 
@@ -62,6 +63,7 @@ class Base
         } else {
             $error_message = 'Invalid property [set: ' . $this->_class_name .
                 '] `' . $property_name . '`';
+            $this->logger->error($error_message);
             throw new Exception($error_message);
         }
     }
