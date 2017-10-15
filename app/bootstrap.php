@@ -11,12 +11,14 @@ use Monolog\Registry;
 
 // vendor & pre-loaders
 include __DIR__ . '/../vendor/autoload.php';
-include __DIR__ . '/../framework/Loader.php';
-include __DIR__ . '/../framework/Kernel.php';
 
 // load environment data
 $dot_env = new Dotenv();
 $dot_env->load(__DIR__ . '/../.env');
+
+// include Kernel and pre-loader
+include __DIR__ . '/../framework/Loader.php';
+include __DIR__ . '/../framework/Kernel.php';
 
 // include configs
 Loader::includeDirectory(__DIR__ . '/../config/');

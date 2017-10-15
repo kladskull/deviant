@@ -1,11 +1,20 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mcurry
- * Date: 9/29/17
- * Time: 2:23 PM
- */
+<?php declare(strict_types=1); // strict mode
 
+/** vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * View Class
+ *
+ * All view objects inherit this class. This contains all of the
+ * underlying mechanics that provide the end result to the HTTP user.
+ * This includes Smarty functionality and view presentation.
+ *
+ * @category   Framework
+ * @package    DeviantFramework
+ * @author     Mike Curry <mikecurry74@gmail.com>
+ * @license    [MIT license](http://opensource.org/licenses/MIT)
+ * @since      File available since Release 0.0.1
+ */
 class View
 {
     public $smarty;

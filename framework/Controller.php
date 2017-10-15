@@ -1,10 +1,18 @@
 <?php declare(strict_types=1); // strict mode
 
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
 /**
- * Created by PhpStorm.
- * User: mcurry
- * Date: 9/28/17
- * Time: 9:49 PM
+ * Base Controller Class
+ *
+ * This class is inherited by all Application controllers to
+ * add any required underlying functionality.
+ *
+ * @category   Framework
+ * @package    DeviantFramework
+ * @author     Mike Curry <mikecurry74@gmail.com>
+ * @license    [MIT license](http://opensource.org/licenses/MIT)
+ * @since      File available since Release 0.0.1
  */
 class Controller
 {

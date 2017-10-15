@@ -1,11 +1,19 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mcurry
- * Date: 10/13/17
- * Time: 1:49 PM
- */
+<?php declare(strict_types=1); // strict mode
 
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * Loader Class
+ *
+ * This class contains utilities that load various parts of the
+ * framework.
+ *
+ * @category   Framework
+ * @package    DeviantFramework
+ * @author     Mike Curry <mikecurry74@gmail.com>
+ * @license    [MIT license](http://opensource.org/licenses/MIT)
+ * @since      File available since Release 0.0.1
+ */
 class Loader
 {
     /**

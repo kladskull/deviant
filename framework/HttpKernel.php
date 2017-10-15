@@ -1,10 +1,19 @@
 <?php declare(strict_types=1); // strict mode
 
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
 /**
- * Created by PhpStorm.
- * User: mcurry
- * Date: 9/28/17
- * Time: 8:26 PM
+ * Http Kernel Class
+ *
+ * This is the Kernel for the Web. It inherits Kernel. This
+ * is used to process any web/http requests, execute any
+ * middleware and then fire off the required controller.
+ *
+ * @category   Framework
+ * @package    DeviantFramework
+ * @author     Mike Curry <mikecurry74@gmail.com>
+ * @license    [MIT license](http://opensource.org/licenses/MIT)
+ * @since      File available since Release 0.0.1
  */
 class HttpKernel extends Kernel
 {

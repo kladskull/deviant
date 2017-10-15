@@ -1,10 +1,19 @@
 <?php declare(strict_types=1); // strict mode
 
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
 /**
- * Created by PhpStorm.
- * User: mcurry
- * Date: 9/28/17
- * Time: 7:27 PM
+ * Kernel Class
+ *
+ * This is the underlying Kernel that is inherited by both the
+ * HttpKernel and the ConsoleKernel. This is the heart of the
+ * framework.
+ *
+ * @category   Framework
+ * @package    DeviantFramework
+ * @author     Mike Curry <mikecurry74@gmail.com>
+ * @license    [MIT license](http://opensource.org/licenses/MIT)
+ * @since      File available since Release 0.0.1
  */
 class Kernel
 {

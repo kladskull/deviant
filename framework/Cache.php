@@ -1,11 +1,22 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mcurry
- * Date: 9/28/17
- * Time: 3:30 PM
- */
+<?php declare(strict_types=1); // strict mode
 
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * Caching Class
+ *
+ * This class serves as an alternative to Redis/Memcache, if neither
+ * exist.
+ *
+ * TODO: Add Redis, Memcache, File, DB support and override as reqd.
+ *
+ *
+ * @category   Framework
+ * @package    DeviantFramework
+ * @author     Mike Curry <mikecurry74@gmail.com>
+ * @license    [MIT license](http://opensource.org/licenses/MIT)
+ * @since      File available since Release 0.0.1
+ */
 class Cache
 {
     public static function get($key, $default_value = null)

@@ -1,11 +1,20 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mcurry
- * Date: 9/29/17
- * Time: 3:42 PM
- */
+<?php declare(strict_types=1); // strict mode
 
+/** vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * Authentication Class
+ *
+ * Anything related to application authentication belongs here
+ * including login/logout functionality and any authentication
+ * checks.
+ *
+ * @category   Framework
+ * @package    DeviantFramework
+ * @author     Mike Curry <mikecurry74@gmail.com>
+ * @license    [MIT license](http://opensource.org/licenses/MIT)
+ * @since      File available since Release 0.0.1
+ */
 class Auth
 {
     public
