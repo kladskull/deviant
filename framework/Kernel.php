@@ -8,7 +8,7 @@
  */
 class Kernel
 {
-    protected $app_version = '0.0.1';
+    protected $app_version = '0.1.0';
     protected $base_path = '';
     public $currentUser = null;
 
