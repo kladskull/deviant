@@ -26,6 +26,7 @@ class Kernel
     {
         $last_slash = strrpos($this->base_path, DIRECTORY_SEPARATOR);
         $target_slash = strrpos($this->base_path, DIRECTORY_SEPARATOR, $last_slash - strlen($this->base_path) - 1);
+
         return substr($this->base_path, 0, $target_slash) . DIRECTORY_SEPARATOR;
     }
 

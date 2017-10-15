@@ -14,6 +14,7 @@ class Auth
         if (!empty($_SESSION['logged_in']) && true === $_SESSION['logged_in']) {
             return true;
         }
+
         return false;
     }
 
@@ -50,7 +51,8 @@ class Auth
             // get the user record
             $passwordHash = null;
             $locked = true;
-            $record = DB::queryFirstRow('SELECT `id`, `locked`, `password` FROM `user` WHERE `email_address`=%s LIMIT 1;', $emailAddress);
+            $record = DB::queryFirstRow('SELECT `id`, `locked`, `password` FROM `user` WHERE `email_address`=%s LIMIT 1;',
+                $emailAddress);
             if ($record !== null) {
                 $passwordHash = $record['password'];
                 $locked = $record['locked'];

@@ -13,12 +13,14 @@ class LogoutController
 
     }
 
-    public function get() {
+    public function get()
+    {
         // don't allow GET logouts, we want POSTS only
         Http::redirect('/error');
     }
 
-    public function post() {
+    public function post()
+    {
         Auth::logout();
     }
 }

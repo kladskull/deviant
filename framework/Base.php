@@ -129,6 +129,7 @@ class Base
 
             $success = true;
         }
+
         return $success;
     }
 
@@ -186,6 +187,7 @@ class Base
     {
         // load the record into the object
         $fields = DB::queryOneRow('SELECT count(1) AS `total` FROM `' . $this->_table_name . '`');
+
         return $fields['total'];
     }
 

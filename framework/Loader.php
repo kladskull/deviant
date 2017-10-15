@@ -12,7 +12,7 @@ class Loader
      * include_directory()
      * auto include PHP files by directory with caching
      *
-     * TODO: Add caching? Maybe not... we could just use composer.. 
+     * TODO: Add caching? Maybe not... we could just use composer..
      * TODO: Replace this with Composer magic/include/functionality
      *
      * @param   string      directory       The Directory to include

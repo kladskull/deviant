@@ -1,16 +1,17 @@
 {
-    "name": "root/html",
-    "require": {
-        "sergeytsalkov/meekrodb": "^2.3",
-        "smarty/smarty": "^3.1",
-        "symfony/dotenv": "^3.3",
-        "owasp/csrf-protector-php": "^0.2.1",
-        "nikic/fast-route": "^1.2"
-    },
-    "require-dev": {
-        "simpletest/simpletest": "^1.1"
-    },
-    "scripts": {
-        "start": "php -S localhost:8080 -t public"
-    }
+  "name": "root/html",
+  "require": {
+    "sergeytsalkov/meekrodb": "^2.3",
+    "smarty/smarty": "^3.1",
+    "symfony/dotenv": "^3.3",
+    "owasp/csrf-protector-php": "^0.2.1",
+    "nikic/fast-route": "^1.2",
+    "phpunit/phpunit": "^6.4"
+  },
+  "require-dev": {
+    "simpletest/simpletest": "^1.1"
+  },
+  "scripts": {
+    "start": "php -S localhost:8080 -t public"
+  }
 }

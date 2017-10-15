@@ -81,12 +81,13 @@ class HttpKernel extends Kernel
         if ($this->is_ssl()) {
             $this->_headers->addHeaders([
                 'Strict-Transport-Security' => 'max-age=16070400; includeSubDomains',
-                'X-Frame-Options' => 'DENY',
-                'Frame-Options' => 'DENY',
-                'X-XSS-Protection' => '1; mode=block',
-                'X-Content-Type-Options' => 'nosniff',
+                'X-Frame-Options'           => 'DENY',
+                'Frame-Options'             => 'DENY',
+                'X-XSS-Protection'          => '1; mode=block',
+                'X-Content-Type-Options'    => 'nosniff',
             ]);
         }
+
         return true;
     }
 
@@ -97,10 +98,13 @@ class HttpKernel extends Kernel
                 '1' == $_SERVER['HTTPS']) {
                 return true;
             }
-        } else if (!empty($_SERVER['SERVER_PORT']) &&
-            '443' == $_SERVER['SERVER_PORT']) {
-            return true;
+        } else {
+            if (!empty($_SERVER['SERVER_PORT']) &&
+                '443' == $_SERVER['SERVER_PORT']) {
+                return true;
+            }
         }
+
         return false;
     }
 
@@ -123,9 +127,11 @@ class HttpKernel extends Kernel
             if (!empty($_SERVER['REQUEST_URI']) &&
                 false !== strpos(strtolower($_SERVER['REQUEST_URI']), '.php')) {
                 $this->_controller = 'errors';
-            } else if (!empty($_SERVER['REDIRECT_URL']) &&
-                false !== strpos(strtolower($_SERVER['REDIRECT_URL']), '.php')) {
-                $this->_controller = 'errors';
+            } else {
+                if (!empty($_SERVER['REDIRECT_URL']) &&
+                    false !== strpos(strtolower($_SERVER['REDIRECT_URL']), '.php')) {
+                    $this->_controller = 'errors';
+                }
             }
 
             // todo: get subcontroller name

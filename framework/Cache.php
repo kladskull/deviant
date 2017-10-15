@@ -42,8 +42,8 @@ class Cache
 
         // update the record
         DB::insertUpdate('cache', [
-            'key' => $key,
-            'value' => $value,
+            'key'     => $key,
+            'value'   => $value,
             'expires' => $expires,
         ]);
     }

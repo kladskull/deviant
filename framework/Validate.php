@@ -15,6 +15,7 @@ class Validate
             !filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
             return false;
         }
+
         return true;
     }
 }

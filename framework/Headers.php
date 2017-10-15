@@ -18,6 +18,7 @@ class Headers
     public function addHeader($header, $data): bool
     {
         $this->headers[trim($header)] = trim($data);
+
         return true;
     }
 
@@ -26,6 +27,7 @@ class Headers
         foreach ($headers as $header => $data) {
             $this->headers[trim($header)] = trim($data);
         }
+
         return true;
     }
 
@@ -35,6 +37,7 @@ class Headers
         if (!empty($this->headers[$header])) {
             $header_data = $this->headers[$header];
         }
+
         return $header_data;
     }
 

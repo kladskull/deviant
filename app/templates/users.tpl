@@ -69,7 +69,8 @@
                                                 <input type="submit" class="btn btn-danger" value="- Admin">
                                             {/if}
                                         </form>
-                                    </div>`
+                                    </div>
+                                    `
                                 {/if}
                             </div>
                         </div>
