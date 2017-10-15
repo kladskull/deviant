@@ -132,6 +132,7 @@ class Base
         if (isset($this->_properties[$field])) {
 
             $id = DB::queryOneField($field, 'SELECT id FROM ' . $this->_table_name . ' WHERE %s=%s', $field, $key);
+            $this->load($id);
 
             $success = true;
         }
