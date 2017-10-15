@@ -5,14 +5,11 @@
 error_reporting(E_ALL | E_STRICT);
 
 use Symfony\Component\Dotenv\Dotenv;
-
-// vendor & pre-loaders
-include __DIR__ . '/../vendor/autoload.php';
-
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-// include some key framework files
+// vendor & pre-loaders
+include __DIR__ . '/../vendor/autoload.php';
 include __DIR__ . '/../framework/Loader.php';
 include __DIR__ . '/../framework/Kernel.php';
 
@@ -28,7 +25,7 @@ $log->pushHandler(new StreamHandler(__DIR__ . '/log/app-' . getenv('ENVIRONMENT'
 Monolog\Registry::addLogger($log);
 
 // include configs
-Loader::includeDirectory(__DIR__ . '/../config/', []);
+Loader::includeDirectory(__DIR__ . '/../config/');
 
 // include underlying framework
 Loader::includeDirectory(__DIR__ . '/../framework/', [
@@ -37,4 +34,4 @@ Loader::includeDirectory(__DIR__ . '/../framework/', [
 ]);
 
 // load Models
-Loader::includeDirectory(__DIR__ . '/../app/models/', []);
+Loader::includeDirectory(__DIR__ . '/../app/models/');

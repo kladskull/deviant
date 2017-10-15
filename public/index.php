@@ -32,7 +32,6 @@ include __DIR__ . '/../app/bootstrap.php';
  +---------------------------------------------------------------------+
 */
 
-
 $httpKernel = new HttpKernel();
 
 // for performance metrics
