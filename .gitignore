@@ -12,3 +12,4 @@ composer.lock
 # smarty
 app/templates/cache/*.php
 app/templates/templates_c/*.php
+.gitignore

@@ -8,12 +8,21 @@ use Symfony\Component\Dotenv\Dotenv;
 
 // vendor & pre-loaders
 include __DIR__ . '/../vendor/autoload.php';
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+// include some key framework files
 include __DIR__ . '/../framework/Loader.php';
 include __DIR__ . '/../framework/Kernel.php';
 
 // load environment data
 $dot_env = new Dotenv();
 $dot_env->load(__DIR__ . '/../.env');
+
+// create a log channel
+$log = new Logger('deviant');
+$log->pushHandler(new StreamHandler(__DIR__ . '/log/deviant-' . getenv('ENVIRONMENT') . '.log', Logger::WARNING));
 
 // include configs
 Loader::includeDirectory(__DIR__ . '/../config/', []);
