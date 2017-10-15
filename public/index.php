@@ -27,7 +27,7 @@ include __DIR__ . '/../app/bootstrap.php';
  +---------------------------------------------------------------------+
  | We can now handle the incoming request. We'll request the page and  |
  | execute it and then output the data to the user. After the request  |
- | is prepaired, it will exit and continue to the bottom of this       |
+ | is prepared, it will exit and continue to the bottom of this        |
  | script.                                                             |
  +---------------------------------------------------------------------+
 */

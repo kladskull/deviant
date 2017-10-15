@@ -126,11 +126,11 @@ class Auth
         if (self::isLoggedIn()) {
             if (!empty($_SESSION['user_id'])) {
                 //try {
-                    $user = new User();
-                    $user->load((int)$_SESSION['user_id']);
-                    if (true == $user->admin) {
-                        return true;
-                    }
+                $user = new User();
+                $user->load((int)$_SESSION['user_id']);
+                if (true == $user->admin) {
+                    return true;
+                }
                 //} catch (Exception $ex) {
                 //    return false;
                 //}
