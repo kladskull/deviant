@@ -12,7 +12,6 @@ class LoginController extends Controller
     {
         // call parent
         parent::__construct();
-        //$this->middleware('auth');
     }
 
     // responds to an HTTP-GET request
@@ -71,7 +70,7 @@ class LoginController extends Controller
             HttpResponse::redirect('/');
             exit(0);
         }
-
+        
         // get credentials
         $email_address = '';
         if (isset($_POST['inputEmail'])) {

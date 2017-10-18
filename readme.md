@@ -31,8 +31,8 @@ will defintely change going forward, so make sure to heavily comment.
 
 The schema can be found in /app/database/ - run it on your MySQL Database.
 
-If your permissions get messed up, you can always run 
-`/fix_perms.sh`.
+Make sure you run the following command as it creates missing directories
+and ensures that they have proper permissions: `/fix_perms.sh`.
 
 ## Post Installation
 Visit yoursite.com/signup - this will allow you to become an 

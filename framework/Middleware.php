@@ -19,7 +19,7 @@ class Middleware
 
     public function __construct()
     {
-        //trimRequests()
+        $this->trimRequests();
     }
 
     // TODO: check for maintenance mode
@@ -28,10 +28,18 @@ class Middleware
 
     protected function trimRequests()
     {
+        $skip_vars = [
+            'inputPassword',
+            'confirmPassword'
+        ];
+
         // TODO: Allow skipping variables such as password
         if (isset($_POST)) {
             foreach ($_POST as $key => $data) {
-                $_POST[$key] = trim($data);
+
+                if (!in_array($key, $skip_vars)) {
+                    $_POST[$key] = trim($data);
+                }
 
                 // change empty strings to null
                 if (empty($_POST[$key])) {
@@ -43,13 +51,17 @@ class Middleware
         // TODO: Allow skipping variables such as password
         if (isset($_GET)) {
             foreach ($_GET as $key => $data) {
-                $_GET[$key] = trim($data);
+
+                if (!in_array($key, $skip_vars)) {
+                    $_GET[$key] = trim($data);
+                }
+
+                // change empty strings to null
+                if (empty($_GET[$key])) {
+                    $_GET[$key] = null;
+                }
             }
 
-            // change empty strings to null
-            if (empty($_GET[$key])) {
-                $_GET[$key] = null;
-            }
         }
     }
 
