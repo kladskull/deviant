@@ -36,8 +36,6 @@ class Auth
             'message' => '',
         ];
 
-        // TODO: MIDDLEWARE - TRIM VARIABLES!!
-
         // done allow anything out of specifications
         if (strlen($emailAddress) > 150) {
             return $result;
