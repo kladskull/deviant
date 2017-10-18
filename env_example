@@ -1,7 +1,13 @@
 
 # Application Settings
+APP_NAME=Deviant
+APP_URL=https://127.0.0.1
 ENVIRONMENT=development
 #ENVIRONMENT=production
+
+# email settings
+EMAIL_FROM_NAME=Someone
+EMAIL_FROM=someone@somewhere.com
 
 # Database Settings
 DB_HOST=127.0.0.1

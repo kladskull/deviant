@@ -1,5 +1,7 @@
 <?php declare(strict_types=1); // strict mode
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 /**
  * Created by PhpStorm.
  * User: mcurry
@@ -22,6 +24,7 @@ class SignupController extends Controller
 
     public function post()
     {
+        $error_message = '';
         $emailAddress = '';
         if (isset($_POST['inputEmail'])) {
             $emailAddress = trim(strtolower($_POST['inputEmail']));
@@ -55,7 +58,7 @@ class SignupController extends Controller
         }
 
         // are they the same?
-        if ($password !== $confirm_password) {
+        if ($password !== $confirm_password && $error_message == '') {
             $error_message = 'Passwords do not match';
         }
 
@@ -65,30 +68,55 @@ class SignupController extends Controller
             // if it already exists, send them an email
             // and continue.. we should pretend it worked.
             if (User::emailExists($emailAddress)) {
-                // TODO: Send an email and let them know they're still a member
+                // send an email reminding them they already have an account
+
+                $message = 'You recently tried to create an account at ' .
+                    getenv('APP_NAME') . ' (' . getenv('APP_URL') . '). You already ' .
+                    'have an account using the same email address.';
+
+                $mail = new PHPMailer;
+                $mail->isSendmail();
+                $mail->setFrom(getenv('EMAIL_FROM'), getenv('EMAIL_FROM_NAME'));
+                $mail->addAddress($emailAddress);
+                $mail->Subject = 'Account already exists';
+                $mail->Body = $message;
+                $mail->AltBody = $message;
+                if (!$mail->send()) {
+                    //echo 'Mailer Error: ' . $mail->ErrorInfo;
+                    // TODO: log this
+                }
+
+                // regenerate the session id
+                session_regenerate_id();
+
+                // redirect user to login
+                $_SESSION['created_account'] = true;
+                Http::redirect('/login');
+
+            } else {
+
+                // create a new user
+                $user = new User();
+                $user->email_address = $emailAddress;
+                $user->password = password_hash($password, PASSWORD_DEFAULT);
+                $user->user_guid = hash('sha512', $emailAddress . $password . time());
+
+                // first user will be granted administration privileges. This
+                // may change going forward.
+                if ($user->count() <= 0) {
+                    $user->admin = true;
+                    $user->locked = false;
+                }
+
+                $user->create();
+
+                // regenerate the session id
+                session_regenerate_id();
+
+                // redirect user to login
+                $_SESSION['created_account'] = true;
+                Http::redirect('/login');
             }
-
-            // create a new user
-            $user = new User();
-            $user->email_address = $emailAddress;
-            $user->password = password_hash($password, PASSWORD_DEFAULT);
-            $user->user_guid = hash('sha512', $emailAddress . $password . time());
-
-            // first user will be granted administration privileges. This
-            // may change going forward.
-            if ($user->count() <= 0) {
-                $user->admin = true;
-                $user->locked = false;
-            }
-
-            $user->create();
-
-            // regenerate the session id
-            session_regenerate_id();
-
-            // redirect user to login
-            $_SESSION['created_account'] = true;
-            Http::redirect('/login');
         }
 
         // show sign-up page
