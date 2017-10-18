@@ -32,7 +32,12 @@ class Kernel
         // set some user data
         if (Auth::isLoggedIn()) {
             $this->currentUser = new User();
-            $this->currentUser->load((int)$_SESSION['user_id']);
+            // load user record
+            try {
+                $this->currentUser->load((int)$_SESSION['user_id']);
+            } catch (Exception $ex) {
+                Auth::logout(false);
+            }
         }
     }
 

@@ -154,7 +154,7 @@ class Base
         return true;
     }
 
-    public function loadByField($field, $key)
+    public function loadByField($field, $key): bool
     {
         $success = false;
         if (isset($this->_properties[$field])) {
