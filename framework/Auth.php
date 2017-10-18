@@ -29,15 +29,15 @@ class Auth
         return $success;
     }
 
-    public static function getLoggedInUser()
+    public static function getLoggedInUserId(): int
     {
         if (self::isLoggedIn()) {
             if (!empty($_SESSION['user_id'])) {
-                return $_SESSION['user_id'];
+                return (int)$_SESSION['user_id'];
             }
         }
 
-        return false;
+        return 0;
     }
 
     public static function login(string $emailAddress, string $password): array
