@@ -1,3 +1,13 @@
+CREATE DATABASE deviant
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+-- use this for all your actions. Instead of delete, use a field called deleted
+CREATE USER 'deviantuser'@'localhost' IDENTIFIED BY 'somepassword';
+GRANT SELECT,INSERT,UPDATE ON deviant.* to 'deviantuser'@'localhost';
+
+USE deviant;
+
 -- Create syntax for TABLE 'cache'
 CREATE TABLE `cache` (
   `id`      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -8,7 +18,6 @@ CREATE TABLE `cache` (
   UNIQUE KEY `key` (`key`)
 )
   ENGINE = InnoDB
-  AUTO_INCREMENT = 35
   DEFAULT CHARSET = utf8mb4;
 
 -- Create syntax for TABLE 'user'
@@ -31,5 +40,4 @@ CREATE TABLE `user` (
   UNIQUE KEY `user_guid` (`user_guid`)
 )
   ENGINE = InnoDB
-  AUTO_INCREMENT = 5
   DEFAULT CHARSET = utf8mb4;
