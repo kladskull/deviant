@@ -131,7 +131,7 @@ class Base
         }
 
         // store record
-        DB::insert('user', [
+        DB::insert($this->_table_name, [
             $this->_properties
         ]);
 
@@ -147,7 +147,7 @@ class Base
         }
 
         // store record
-        DB::update('user', [
+        DB::update($this->_table_name, [
             $this->_properties
         ], 'id=%i', $id);
 
@@ -158,6 +158,12 @@ class Base
     {
         $success = false;
         if (isset($this->_properties[$field])) {
+
+            if ($field == 'id') {
+                if (!Validate::recordId($key)) {
+                    return false;
+                }
+            }
 
             $id = DB::queryOneField($field, 'SELECT id FROM ' . $this->_table_name . ' WHERE %s=%s', $field, $key);
             $this->load($id);
@@ -171,6 +177,10 @@ class Base
     public function load(int $id, bool $checkIntegrity = true): bool
     {
         $success = false;
+
+        if (!Validate::recordId($id)) {
+            return false;
+        }
 
         // load the record into the object
         $fields = DB::queryOneRow('SELECT * FROM ' . $this->_table_name . ' WHERE id=%i LIMIT 1;', $id);
@@ -246,7 +256,7 @@ class Base
 
     public function getAll()
     {
-        // get all user records
+        // get all data records
         return DB::query('SELECT * FROM `' . $this->_table_name . '`');
     }
 

@@ -26,4 +26,13 @@ class Validate
 
         return true;
     }
+
+    public static function recordId(int $recordId): bool
+    {
+        if (!filter_var($recordId, FILTER_VALIDATE_INT) || $recordId < 1) {
+            return false;
+        }
+
+        return true;
+    }
 }

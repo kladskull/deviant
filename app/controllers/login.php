@@ -70,7 +70,7 @@ class LoginController extends Controller
             HttpResponse::redirect('/');
             exit(0);
         }
-        
+
         // get credentials
         $email_address = '';
         if (isset($_POST['inputEmail'])) {

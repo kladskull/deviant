@@ -17,7 +17,7 @@ class User extends Base
     protected $immutable_fields = [
         'id',
         'password',
-        'user_guid',
+        'record_guid',
         'date_created',
         'created_by',
         'date_modified',
