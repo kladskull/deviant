@@ -34,7 +34,7 @@ class Kernel
             $this->currentUser = new User();
             // load user record
             try {
-                $this->currentUser->load((int)$_SESSION['user_id']);
+                $this->currentUser->load(Auth::getLoggedInUserId());
             } catch (Exception $ex) {
                 Auth::logout(false);
             }

@@ -30,7 +30,7 @@ class Api extends Base
     }
 
 
-    public function getAllUsersKeys(int $userId)
+    public static function getAllUsersKeys(int $userId)
     {
         if (!Validate::recordId($userId)) {
             return null;

@@ -19,8 +19,7 @@ class ApiController extends Controller
     public function get()
     {
         // get all users
-        $api = new Api();
-        $apiKeys = $api->getAllUsersKeys();
+        $apiKeys = Api::getAllUsersKeys(Auth::getLoggedInUserId());
         $this->view->smarty->assign('apiKeys', $apiKeys);
 
         // display template

@@ -29,6 +29,17 @@ class Auth
         return $success;
     }
 
+    public static function getLoggedInUser()
+    {
+        if (self::isLoggedIn()) {
+            if (!empty($_SESSION['user_id'])) {
+                return $_SESSION['user_id'];
+            }
+        }
+
+        return false;
+    }
+
     public static function login(string $emailAddress, string $password): array
     {
         $result = [
@@ -131,10 +142,10 @@ class Auth
     public static function isAdmin()
     {
         if (self::isLoggedIn()) {
-            if (!empty($_SESSION['user_id'])) {
+            if (Auth::getLoggedInUserId()) {
                 //try {
                 $user = new User();
-                $user->load((int)$_SESSION['user_id']);
+                $user->load(Auth::getLoggedInUserId());
                 if (true == $user->admin) {
                     return true;
                 }
