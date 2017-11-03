@@ -21,4 +21,22 @@ class Http
         header('Location: ' . $url);
         exit(0);
     }
+
+    public static function isSSL(): bool
+    {
+        if (!empty($_SERVER['HTTPS'])) {
+            if ('on' == strtolower($_SERVER['HTTPS']) ||
+                '1' == $_SERVER['HTTPS']) {
+                return true;
+            }
+        } else {
+            if (!empty($_SERVER['SERVER_PORT']) &&
+                '443' == $_SERVER['SERVER_PORT']) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

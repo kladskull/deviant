@@ -20,7 +20,7 @@ class ApiController extends Controller
     {
         // get all users
         $apiKeys = Api::getAllUsersKeys(Auth::getLoggedInUserId());
-        $this->view->smarty->assign('apiKeys', $apiKeys);
+        $this->view->smarty->assign('apiRecords', $apiKeys);
 
         // display template
         $this->view->smarty->display('api.tpl');

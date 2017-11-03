@@ -2,6 +2,9 @@
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+
 /**
  * Http Kernel Class
  *
@@ -32,8 +35,7 @@ class HttpKernel extends Kernel
 
         // initialize CSRF protection
         csrfProtector::init();
-
-        $this->_ssl_enabled = $this->is_ssl();
+        $this->_ssl_enabled = Http::isSSL();
         $this->_headers = new Headers();
         $this->addHeaders();
         $this->getControllerRequest();
@@ -61,33 +63,9 @@ class HttpKernel extends Kernel
         }
     }
 
-    private function getFunctionName()
-    {
-        $func_name = '';
-
-        switch ($this->_method) {
-            case 'GET':
-                $func_name = 'get';
-                break;
-            case 'POST':
-                $func_name = 'post';
-                break;
-            case 'PUT':
-                $func_name = 'put';
-                break;
-            case 'DELETE':
-                $func_name = 'delete';
-                break;
-            default:
-                break;
-        }
-
-        return $func_name;
-    }
-
     private function addHeaders(): bool
     {
-        if ($this->is_ssl()) {
+        if ($this->_ssl_enabled) {
             $this->_headers->addHeaders([
                 'Strict-Transport-Security' => 'max-age=16070400; includeSubDomains',
                 'X-Frame-Options'           => 'DENY',
@@ -98,23 +76,6 @@ class HttpKernel extends Kernel
         }
 
         return true;
-    }
-
-    public function is_ssl(): bool
-    {
-        if (!empty($_SERVER['HTTPS'])) {
-            if ('on' == strtolower($_SERVER['HTTPS']) ||
-                '1' == $_SERVER['HTTPS']) {
-                return true;
-            }
-        } else {
-            if (!empty($_SERVER['SERVER_PORT']) &&
-                '443' == $_SERVER['SERVER_PORT']) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     protected function getControllerRequest(): bool

@@ -37,6 +37,7 @@ class Api extends Base
         }
 
         // TODO: get rid of the *
-        return DB::query('SELECT * FROM `api` WHERE user_id=%i;', $userId);
+        return DB::query('SELECT `id`,`description`,`access_id`,`date_created`,`last_used`,`Locked` FROM `api` WHERE user_id=%i;',
+            $userId);
     }
 }

@@ -37,5 +37,8 @@ Loader::includeDirectory(__DIR__ . '/../framework/', [
     'Loader.php',
 ]);
 
+// load routes
+Loader::includeDirectory(__DIR__ . '/../app/routes/');
+
 // load Models
 Loader::includeDirectory(__DIR__ . '/../app/models/');
