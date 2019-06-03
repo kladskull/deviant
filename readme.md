@@ -23,6 +23,10 @@ we only support Smarty. If you have any issues, take a loot at some of
 the base project, specifically `/app/controllers/login.php' and its template
 '/app/templates/login.tpl'.
 
+Install composer, and run `composer install` in the composer directory.
+
+Install apache2 modules `header` and `rewrite`.
+
 You will also need to copy `/env_example` to `/.env` and modify the 
 contents to your server configuration. 
 
