@@ -35,7 +35,9 @@ class HttpKernel extends Kernel
         parent::__construct();
 
         // initialize CSRF protection
-        csrfProtector::init();
+
+        session_start();
+        
         $this->_ssl_enabled = Http::isSSL();
         $this->_headers = new Headers();
         $this->addHeaders();

@@ -98,7 +98,6 @@ class Auth
                     session_destroy();
                 }
             }
-
         } else {
             // too many attempts, let them know
             $error_message = 'Too many invalid attempts, try again later';
