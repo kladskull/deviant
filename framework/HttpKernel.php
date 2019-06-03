@@ -28,6 +28,7 @@ class HttpKernel extends Kernel
     protected $_ssl_enabled = false;
     protected $_response = [];
     protected $_headers = null;
+    protected $_requestVars = [];
 
     public function __construct()
     {
@@ -43,16 +44,17 @@ class HttpKernel extends Kernel
         // TODO: process middleware
 
         // TODO: get the controller, collect the requests and run it
-
         $this->runController();
     }
 
     protected function runController()
     {
-        // include the controller
-        require $this->_controller_file_name;
+        include $this->_controller_file_name;
+
         $objectName = ucfirst($this->_controller) . 'Controller';
         $controllerObject = new $objectName();
+
+        $controllerObject->requestVars = $this->_requestVars;
 
         // start it
         $action = strtolower($this->_method);
@@ -68,10 +70,10 @@ class HttpKernel extends Kernel
         if ($this->_ssl_enabled) {
             $this->_headers->addHeaders([
                 'Strict-Transport-Security' => 'max-age=16070400; includeSubDomains',
-                'X-Frame-Options'           => 'DENY',
-                'Frame-Options'             => 'DENY',
-                'X-XSS-Protection'          => '1; mode=block',
-                'X-Content-Type-Options'    => 'nosniff',
+                'X-Frame-Options' => 'DENY',
+                'Frame-Options' => 'DENY',
+                'X-XSS-Protection' => '1; mode=block',
+                'X-Content-Type-Options' => 'nosniff',
             ]);
         }
 
@@ -104,9 +106,7 @@ class HttpKernel extends Kernel
                 }
             }
 
-            // todo: get subcontroller name
-
-            // todo: get variables
+            $this->_requestVars = $request_url;
 
             // check path
             $file_name = $this->basePath() . '/app/controllers/' . $this->_controller . '.php';
