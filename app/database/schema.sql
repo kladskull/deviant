@@ -29,6 +29,7 @@ CREATE TABLE `user` (
   `password`      CHAR(255)                 DEFAULT NULL,
   `user_guid`     CHAR(128)                 DEFAULT NULL,
   `locked`        TINYINT(3) UNSIGNED       DEFAULT '1',
+  `record_guid`   CHAR(128)                 DEFAULT NULL,
   `date_created`  DATETIME                  DEFAULT NULL,
   `created_by`    INT(10) UNSIGNED          DEFAULT NULL,
   `date_modified` DATETIME                  DEFAULT NULL,
@@ -41,3 +42,20 @@ CREATE TABLE `user` (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
+
+create table api
+(
+    `id` int auto_increment
+        primary key,
+    `user_id` int null,
+    `access_id` char(128) null,
+    `description` char(255) null,
+    `last_used` datetime null,
+    `locked` int null,
+    `record_guid` char(128) null,
+    `date_created` datetime null,
+    `created_by` int null,
+    `date_modified` datetime null,
+    `modified_by` int null,
+    `signature` char(128) null
+);
