@@ -59,12 +59,15 @@ class Auth
 
         // update the attempts for this account
         $attempts = Cache::get('attempts_' . $emailAddress, 0);
-        Cache::set('attempts_' . $emailAddress, ++$attempts, 600);
+        try {
+            Cache::set('attempts_' . $emailAddress, ++$attempts, 600);
+        } catch (Exception $e) {
+        }
 
         // check attempts
         if ($attempts <= 6) {
             // get the user record
-            $passwordHash = null;
+            $passwordHash = '';
             $locked = true;
             $record = DB::queryFirstRow('SELECT `id`, `locked`, `password` FROM `user` WHERE `email_address`=%s LIMIT 1;',
                 $emailAddress);
@@ -86,7 +89,10 @@ class Auth
                     // clean up
                     $result['success'] = true;
                     $error_message = '';
-                    Cache::set('attempts_' . $emailAddress, 0, 600);
+                    try {
+                        Cache::set('attempts_' . $emailAddress, 0, 600);
+                    } catch (Exception $e) {
+                    }
 
                     // mitigate session high-jacking
                     session_regenerate_id();
@@ -142,15 +148,16 @@ class Auth
     {
         if (self::isLoggedIn()) {
             if (Auth::getLoggedInUserId()) {
-                //try {
                 $user = new User();
-                $user->load(Auth::getLoggedInUserId());
+                try {
+                    $user->load(Auth::getLoggedInUserId());
+                } catch (Exception $e) {
+                    return false;
+                }
+
                 if (true == $user->admin) {
                     return true;
                 }
-                //} catch (Exception $ex) {
-                //    return false;
-                //}
             }
         }
 

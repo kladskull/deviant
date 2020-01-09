@@ -25,7 +25,7 @@ class Cache
         $record = DB::queryFullColumns('SELECT `value`, `expires` FROM `cache` WHERE `key`=%s LIMIT 1;', $key);
         if (!empty($record[0])) {
             // only return data if not expired (or no expiry)
-            if (time(0) < $record[0]['cache.expires'] || 0 == $record[0]['cache.expires']) {
+            if (time() < $record[0]['cache.expires'] || 0 == $record[0]['cache.expires']) {
                 $return_value = $record[0]['cache.value'];
             }
         }

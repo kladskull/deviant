@@ -9,6 +9,9 @@
     <title>{block name=title}My Website{/block}</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/base-template.css" rel="stylesheet">
+    <link href="/css/dark-mode.css" rel="stylesheet">
+    <link href="/css/dark-mode-switch.css" rel="stylesheet">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     {block name=head}{/block}
 </head>
 <body>
@@ -43,6 +46,20 @@
             {/if}
         </ul>
         <ul class="nav navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Settings
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div class="nav-item theme-switch-wrapper">
+                        <em>&nbsp;&nbsp;&nbsp;Night Mode</em>
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox" />
+                            <div class="slider round"></div>
+                        </label>
+                    </div>
+                </div>
+            </li>
             {if $loggedIn}
                 <form action="/logout" method="post">
                     <button type="submit" name="logout" value="logout" class="btn btn-dark">Logout</button>
@@ -54,11 +71,30 @@
         </ul>
     </div>
 </nav>
+{if $loggedIn}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+            </button>
+        </div>
+    </div>
+</main>
+{/if}
 {block name=body}{/block}
 <script src="/js/jquery-3.2.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/ie10-viewport-bug-workaround.js"></script>
+<script src="/js/dark-mode.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 {block name=js}{/block}
 </body>
 </html>

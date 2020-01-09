@@ -124,7 +124,5 @@ class SignupController extends Controller
             $this->view->smarty->assign('errorMessage', $error_message);
         }
         $this->view->smarty->display('signup.tpl');
-
     }
-
 }
