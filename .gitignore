@@ -8,6 +8,7 @@ composer.lock
 # dot_env
 .env
 .env.*
+phinx.yml
 
 # smarty
 app/templates/cache/*.php
