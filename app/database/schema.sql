@@ -45,8 +45,7 @@ CREATE TABLE `user` (
 
 create table api
 (
-    `id` int auto_increment
-        primary key,
+    `id` int auto_increment primary key,
     `user_id` int null,
     `access_id` char(128) null,
     `description` char(255) null,

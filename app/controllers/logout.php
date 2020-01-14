@@ -6,11 +6,12 @@
  * Time: 8:53 PM
  */
 // preserve attempts & redirect them to logout...
-class LogoutController
+class LogoutController extends Controller
 {
     public function __construct()
     {
-
+        // call parent
+        parent::__construct();
     }
 
     public function get()
@@ -24,3 +25,4 @@ class LogoutController
         Auth::logout();
     }
 }
+
