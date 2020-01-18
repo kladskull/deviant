@@ -1,20 +1,45 @@
 {
-  "name": "root/html",
-  "require": {
-    "sergeytsalkov/meekrodb": "^2.3",
-    "smarty/smarty": "^3.1",
-    "symfony/dotenv": "^3.3",
-    "nikic/fast-route": "^1.2",
-    "phpunit/phpunit": "^6.4",
-    "monolog/monolog": "^1.23",
-    "phpmailer/phpmailer": "^6.0",
-    "symfony/polyfill-mbstring": "^1.6",
-    "robmorgan/phinx": "^0.11.4"
-  },
-  "require-dev": {
-    "simpletest/simpletest": "^1.1"
-  },
-  "scripts": {
-    "start": "php -S localhost:8080 -t public"
-  }
+	"name": "currazy/deviant",
+	"type": "application",
+	"description": "Extensible Framework",
+	"keywords": [
+		"currazy",
+		"framework"
+	],
+	"homepage": "https://github.com/mikecurry74/crm",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Mike Curry",
+			"email": "mike@currazy.com",
+			"homepage": "https://currazy.com",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": "~7.2",
+		"monolog/monolog": "^2.0",
+		"sergeytsalkov/meekrodb": "^2.3",
+		"smarty/smarty": "^3.1",
+		"symfony/dotenv": "^5.0"
+	},
+	"require-dev": {
+	},
+	"scripts": {
+		"start": "php -S localhost:8080 -t public",
+		"test": "phpunit",
+		"check-style": "phpcs src tests",
+		"fix-style": "phpcbf src tests"
+	},
+	"autoload": {
+		"psr-4": {
+			"Deviant\\Framework\\": "framework",
+			"Deviant\\Controllers\\": "app/controllers",
+			"Deviant\\Models\\": "app/models",
+			"Deviant\\Routes\\": "app/routes"
+		}
+	},
+	"config": {
+		"sort-packages": true
+	}
 }
