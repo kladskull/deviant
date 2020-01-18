@@ -1,6 +1,12 @@
 <?php declare(strict_types=1); // strict mode
 
+namespace Deviant\Controllers;
+
+use Deviant\Framework\Http;
+use Deviant\Framework\Validate;
+use Deviant\Models\User;
 use PHPMailer\PHPMailer\PHPMailer;
+use Deviant\Framework\Controller;
 
 /**
  * Created by PhpStorm.
@@ -71,12 +77,12 @@ class SignupController extends Controller
                 // send an email reminding them they already have an account
 
                 $message = 'You recently tried to create an account at ' .
-                    getenv('APP_NAME') . ' (' . getenv('APP_URL') . '). You already ' .
+                    $_ENV['APP_NAME'] . ' (' . $_ENV['APP_URL'] . '). You already ' .
                     'have an account using the same email address.';
 
                 $mail = new PHPMailer;
                 $mail->isSendmail();
-                $mail->setFrom(getenv('EMAIL_FROM'), getenv('EMAIL_FROM_NAME'));
+                $mail->setFrom($_ENV['EMAIL_FROM'], $_ENV['EMAIL_FROM_NAME']);
                 $mail->addAddress($emailAddress);
                 $mail->Subject = 'Account already exists';
                 $mail->Body = $message;

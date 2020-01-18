@@ -1,5 +1,12 @@
 <?php declare(strict_types=1); // strict mode
 
+namespace Deviant\Controllers;
+
+namespace Deviant\Models;
+namespace Deviant\Framework;
+
+use Deviant\Models\Api;
+
 /**
  * Created by PhpStorm.
  * User: mcurry

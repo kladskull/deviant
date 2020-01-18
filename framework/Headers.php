@@ -2,6 +2,8 @@
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
+namespace Deviant\Framework;
+
 /**
  * Headers Class
  *
@@ -25,7 +27,6 @@ class Headers
     public function addHeader($header, $data): bool
     {
         $this->headers[trim($header)] = trim($data);
-
         return true;
     }
 

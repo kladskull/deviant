@@ -1,5 +1,10 @@
 <?php declare(strict_types=1); // strict mode
 
+namespace Deviant\Controllers;
+
+use Deviant\Framework\Controller;
+use Deviant\Models\User;
+
 /**
  * Created by PhpStorm.
  * User: mcurry
@@ -21,10 +26,6 @@ class UsersController extends Controller
 
     public function get()
     {
-        // get all users
-        $users = User::getUserList();
-        $this->view->smarty->assign('users', $users);
-
         // display string
         $this->view->smarty->display('users.tpl');
     }
@@ -86,5 +87,4 @@ class UsersController extends Controller
         // reload the page
         $this->get();
     }
-
 }

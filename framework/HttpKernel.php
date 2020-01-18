@@ -2,8 +2,9 @@
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
+namespace Deviant\Framework;
+
+use Deviant\Controllers;
 
 /**
  * Http Kernel Class
@@ -37,7 +38,7 @@ class HttpKernel extends Kernel
         // initialize CSRF protection
 
         session_start();
-        
+
         $this->_ssl_enabled = Http::isSSL();
         $this->_headers = new Headers();
         $this->addHeaders();
@@ -51,12 +52,28 @@ class HttpKernel extends Kernel
 
     protected function runController()
     {
-        include $this->_controller_file_name;
-
-        $objectName = ucfirst($this->_controller) . 'Controller';
-        $controllerObject = new $objectName();
+        $objectName = 'Deviant\\Controllers\\'.ucfirst($this->_controller) . 'Controller';
+        $controllerObject = new $objectName;
 
         $controllerObject->requestVars = $this->_requestVars;
+
+        // for menu control
+        $currentMenuItem = '/' . $this->_controller;
+        if ($currentMenuItem === '/index') {
+            $currentMenuItem = '/';
+        }
+        $controllerObject->view->smarty->assign('currentPage', $currentMenuItem);
+
+        // for unique page id's
+        $controllerObject->view->smarty->assign('form_unique_name',
+            hash('sha256', getenv('APP_SECRET') . session_id())
+        );
+
+        $controllerObject->view->smarty->assign('form_unique_id',
+            hash('sha256', getenv('APP_SECRET') . uniqid())
+        );
+
+        $controllerObject->view->smarty->assign('GOOGLE_PLACES_API_KEY', getenv('GOOGLE_PLACES_API_KEY'));
 
         // start it
         $action = strtolower($this->_method);
@@ -92,7 +109,7 @@ class HttpKernel extends Kernel
         }
 
         // get requested controller
-        $this->_controller_file_name = $this->basePath() . '/app/controllers/index.php';
+        $this->_controller_file_name = $this->basePath() . '/app/controllers/IndexController.php';
         if (count($request_url) > 1) {
             // filter out anything but alphanumeric, '-', and '_' for the controller
             $this->_controller = preg_replace('/[^a-zA-Z0-9\-_]/', '', trim($request_url[1]));
@@ -116,7 +133,7 @@ class HttpKernel extends Kernel
                 $this->_controller_file_name = $file_name;
             } else {
                 $this->_controller = 'errors';
-                $this->_controller_file_name = $this->basePath() . 'app/controllers/errors.php';
+                $this->_controller_file_name = $this->basePath() . 'app/controllers/ErrorsController.php';
             }
         }
 
@@ -128,10 +145,9 @@ class HttpKernel extends Kernel
 
         // set to default
         if (null == $this->_controller) {
-            $this->_controller_file_name = __DIR__ . '/controllers/index.php';
+            $this->_controller_file_name = __DIR__ . '/controllers/IndexController.php';
         }
 
         return $success;
     }
-
 }

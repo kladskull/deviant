@@ -6,6 +6,8 @@
  * Time: 8:05 PM
  */
 
+namespace Deviant\Routes;
+
 class AuthenticatedRoutes
 {
 

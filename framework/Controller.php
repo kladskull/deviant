@@ -2,6 +2,10 @@
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
+namespace Deviant\Framework;
+
+use Monolog\Registry;
+
 /**
  * Base Controller Class
  *
@@ -16,19 +20,22 @@
  */
 class Controller
 {
-    protected $view;
+    public $view;
     protected $middleware;
     protected $logger = null;
 
     public $requestVars = [];
+    public $menuArray = [];
 
     public function __construct()
     {
         $this->view = new View();
         $this->middleware = new Middleware();
 
-        // get logger instance
-        $this->_logger = Monolog\Registry::getInstance('app');
-    }
+        // get menu items
+        $this->view->smarty->assign('menuItems', require '../config/menu.php');
 
+        // get logger instance
+        $this->_logger = Registry::getInstance('app');
+    }
 }

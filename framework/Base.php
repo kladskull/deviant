@@ -2,6 +2,14 @@
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
+namespace Deviant\Framework;
+
+use DateTime;
+use DB;
+use Exception;
+use MeekroDBException;
+use Monolog\Registry;
+
 /**
  * Base Model Class
  *
@@ -22,19 +30,34 @@ class Base
     protected $_table_name = null;
     protected $_class_name = '';
     protected $logger = null;
+    protected $skip_database;
 
-    // constructor
-    public function __construct()
+    /**
+     * Constructor
+     * @codeCoverageIgnore
+     */
+    public function __construct($id = null)
     {
+        if (getenv('NO_DB_CONNECTION')) {
+            return;
+        };
+
         // get the `potential` table name of the child object
         $this->loadProperties(strtolower(get_class($this)));
         $this->_class_name = get_class($this);
 
         // get logger instance
-        $this->logger = Monolog\Registry::getInstance('app');
+        $this->logger = Registry::getInstance('app');
+
+        if ($id !== null) {
+            $this->load((int)$id, false);
+        }
     }
 
-    // do not allow magic methods
+    /**
+     * do not allow magic methods
+     * @codeCoverageIgnore
+     */
     public function __get(string $property_name)
     {
         $return_value = null;
@@ -52,7 +75,11 @@ class Base
         return $return_value;
     }
 
-    // do not allow magic methods
+    /**
+     * do not allow magic methods
+     * @codeCoverageIgnore
+     * @throws Exception
+     */
     public function __set(string $property_name, $value)
     {
         // only allow valid properties
@@ -123,7 +150,6 @@ class Base
 
         // store the user who last modified the data (if it exists)
         if (isset($this->_fields['created_by'])) {
-            $user_id = 0;
             $user_id = Auth::getLoggedInUserId();
             $this->_properties['created_by'] = $user_id;
         }
@@ -149,12 +175,11 @@ class Base
             $this->_properties
         ], 'id=%i', $id);
 
-        return true;
+        return $id;
     }
 
     public function loadByField($field, $key): bool
     {
-        $success = false;
         if (isset($this->_properties[$field])) {
 
             if ($field == 'id') {
@@ -165,11 +190,9 @@ class Base
 
             $id = DB::queryOneField($field, 'SELECT id FROM ' . $this->_table_name . ' WHERE %s=%s', $field, $key);
             $this->load($id);
-
-            $success = true;
         }
 
-        return $success;
+        return $id;
     }
 
     public function load(int $id, bool $checkIntegrity = true): bool
@@ -187,6 +210,10 @@ class Base
                 $this->_properties[$field_name] = $field;
             }
 
+            // default
+            $fields['data_message'] = 'Data passed';
+            $fields['data_integrity'] = true;
+
             // check record's signature to verify data, warn if something is wrong
             if ($checkIntegrity) {
                 $calculatedSignature = $this->getSignature();
@@ -194,10 +221,13 @@ class Base
                     $message = 'Signature mismatch, possible data tampering.';
                     $this->logger->warning($message, [
                         'CalculatedSignature' => $calculatedSignature,
-                        'StoredSignature'     => $this->_properties['signature'],
-                        'Fields'              => $this->_properties,
+                        'StoredSignature' => $this->_properties['signature'],
+                        'Fields' => $this->_properties,
                     ]);
-                    throw new Exception('Data integrity violation');
+
+                    // add data integrity warning messages
+                    $fields['data_message'] = 'Data integrity violation';
+                    $fields['data_integrity'] = false;
                 }
             }
 
@@ -250,10 +280,24 @@ class Base
         return (int)$fields['total'];
     }
 
-    public function getAll()
+    public function get($id)
     {
         // get all data records
-        return DB::query('SELECT * FROM `' . $this->_table_name . '`');
+        return DB::query('SELECT * FROM `' . $this->_table_name . '` WHERE `id`=%i', $id);
     }
 
+    public function getAll($id = null)
+    {
+        if ($id !== null) {
+            // get all data records
+            return DB::query(
+                'SELECT * FROM `' . $this->_table_name . '` WHERE `id`=%i', $id
+            );
+        }
+
+        // get all data records
+        return DB::query(
+            'SELECT * FROM `' . $this->_table_name . '`'
+        );
+    }
 }

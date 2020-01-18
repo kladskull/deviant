@@ -6,6 +6,8 @@
  * Time: 8:14 PM
  */
 
+namespace Deviant\Framework;
+
 class Route
 {
     protected $sslEnabled;
@@ -15,7 +17,7 @@ class Route
         // initialize CSRF?
         if (!defined(CSRF_INITIALIZED)) {
             // initialize CSRF protection
-            csrfProtector::init();
+            //csrfProtector::init();
             define('CSRF_INITIALIZED', true);
         }
 

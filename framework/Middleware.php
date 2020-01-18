@@ -2,6 +2,8 @@
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
+namespace Deviant\Framework;
+
 /**
  * Middleware Class
  *
@@ -16,10 +18,10 @@
  */
 class Middleware
 {
-
     public function __construct()
     {
         $this->trimRequests();
+        $this->removeUniquePostId();
     }
 
     // TODO: check for maintenance mode
@@ -33,7 +35,7 @@ class Middleware
             'confirmPassword'
         ];
 
-        // TODO: Allow skipping variables such as password
+        // Allow skipping variables such as password
         if (isset($_POST)) {
             foreach ($_POST as $key => $data) {
 
@@ -48,7 +50,7 @@ class Middleware
             }
         }
 
-        // TODO: Allow skipping variables such as password
+        // Allow skipping variables such as password
         if (isset($_GET)) {
             foreach ($_GET as $key => $data) {
 
@@ -69,14 +71,8 @@ class Middleware
     public function require(string $requirement)
     {
         switch ($requirement) {
-            case 'auth':
-                if (!Auth::isLoggedIn()) {
-                    $_SESSION['err'] = 401;
-                    Http::redirect('/errors');
-                }
-                break;
-
             case 'admin':
+            case 'auth':
                 if (!Auth::isLoggedIn()) {
                     $_SESSION['err'] = 401;
                     Http::redirect('/errors');
@@ -85,6 +81,44 @@ class Middleware
 
             default:
                 break;
+        }
+    }
+
+    private function removeUniquePostId()
+    {
+        $formUniqueName = hash('sha256',
+            getenv('APP_SECRET') . session_id());
+
+        if (isset($_POST)) {
+            if (isset($_POST[$formUniqueName])) {
+                $inputUnique = $_POST[$formUniqueName];
+
+                foreach ($_POST as $key => $data) {
+                    if (substr($key, 0, 5) == 'input') {
+                        $newKey = str_replace($inputUnique, '', $key);
+                        $_POST[$newKey] = $data;
+                        unset($_POST[$key]);
+                    }
+                }
+
+                unset($_POST[$formUniqueName]);
+            }
+        }
+
+        if (isset($_GET)) {
+            if (isset($_GET[$formUniqueName])) {
+                $inputUnique = $_GET[$formUniqueName];
+
+                foreach ($_GET as $key => $data) {
+                    if (substr($key, 0, 5) == 'input') {
+                        $newKey = str_replace($inputUnique, '', $key);
+                        $_GET[$newKey] = $data;
+                        unset($_GET[$key]);
+                    }
+                }
+
+                unset($_GET[$formUniqueName]);
+            }
         }
     }
 }

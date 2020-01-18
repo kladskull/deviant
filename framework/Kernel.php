@@ -2,6 +2,12 @@
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
+namespace Deviant\Framework;
+
+use Exception;
+use Monolog\Registry;
+use Deviant\Models\User;
+
 /**
  * Kernel Class
  *
@@ -27,7 +33,7 @@ class Kernel
         $this->base_path = __FILE__;
 
         // get logger instance
-        $this->_logger = Monolog\Registry::getInstance('app');
+        $this->_logger = Registry::getInstance('app');
 
         // set some user data
         if (Auth::isLoggedIn()) {

@@ -1,5 +1,11 @@
 <?php declare(strict_types=1); // strict mode
 
+namespace Deviant\Framework;
+
+use DB;
+use Exception;
+use Deviant\Models\User;
+
 /** vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
@@ -17,8 +23,7 @@
  */
 class Auth
 {
-    public
-    static function isLoggedIn(): bool
+    public static function isLoggedIn(): bool
     {
         $success = false;
 
@@ -85,6 +90,8 @@ class Auth
                     // set session variables
                     $_SESSION['logged_in'] = true;
                     $_SESSION['user_id'] = $record['id'];
+
+                    $_SESSION['company_id'] = 0;
 
                     // clean up
                     $result['success'] = true;
@@ -163,5 +170,4 @@ class Auth
 
         return false;
     }
-
 }

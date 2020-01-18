@@ -6,7 +6,6 @@ namespace Deviant;
 // error reporting & security
 error_reporting(E_ALL | E_STRICT);
 
-use Deviant\Controllers\IndexController;
 use Symfony\Component\Dotenv\Dotenv;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;

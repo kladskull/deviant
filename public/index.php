@@ -1,5 +1,9 @@
 <?php declare(strict_types=1); // strict mode
 
+namespace Deviant\Http;
+
+use Deviant\Framework\HttpKernel;
+
 /**
  * PSF - A PHP Boilerplate framework
  *

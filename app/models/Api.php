@@ -1,5 +1,11 @@
 <?php declare(strict_types=1); // strict mode
 
+namespace Deviant\Models;
+
+use DB;
+use Deviant\Framework\Base;
+use Deviant\Framework\Validate;
+
 /**
  * Created by PhpStorm.
  * User: mcurry

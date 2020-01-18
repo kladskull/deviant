@@ -1,5 +1,10 @@
 <?php declare(strict_types=1); // strict mode
 
+namespace Deviant\Models;
+
+use Deviant\Framework\Base;
+use Deviant\Framework\Validate;
+
 /**
  * Created by PhpStorm.
  * User: mcurry
@@ -25,15 +30,16 @@ class User extends Base
         'signature',
     ];
 
-    public function __construct()
+    public function __construct($id = null)
     {
-        parent::__construct();
+        parent::__construct($id = null);
     }
 
     public
     static function emailExists(
         string $email
-    ): bool {
+    ): bool
+    {
         if (Validate::emailAddress($email)) {
             // get the user record
             $record = DB::queryFirstRow('SELECT `email_address` FROM `user` WHERE `email_address`=%s LIMIT 1;', $email);
@@ -43,11 +49,5 @@ class User extends Base
         }
 
         return false;
-    }
-
-    public static function getUserList()
-    {
-        // get all user records
-        return DB::query('SELECT `id`,`email_address`,`locked`,`admin` FROM `user`');
     }
 }

@@ -2,6 +2,11 @@
 
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
+namespace Deviant\Framework;
+
+use DB;
+use Exception;
+
 /**
  * Caching Class
  *

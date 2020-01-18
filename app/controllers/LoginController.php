@@ -1,5 +1,11 @@
 <?php declare(strict_types=1); // strict mode
 
+namespace Deviant\Controllers;
+
+use Deviant\Framework\Auth;
+use Deviant\Framework\Controller;
+use Deviant\Framework\Http;
+
 /**
  * Created by PhpStorm.
  * User: mcurry
@@ -67,7 +73,7 @@ class LoginController extends Controller
     public function post()
     {
         if (!isset($_POST['inputEmail'])) {
-            HttpResponse::redirect('/');
+            Http::redirect('/');
             exit(0);
         }
 
