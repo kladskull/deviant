@@ -23,14 +23,14 @@ class Loader
      * TODO: Add caching? Maybe not... we could just use composer..
      * TODO: Replace this with Composer magic/include/functionality
      *
-     * @param   string      directory       The Directory to include
-     * @param   array       do_not_include  Any files to NOT include (optional)
-     *
-     * @throws  Exception   If directory doesn't exist.
+     * @param string      directory       The Directory to include
+     * @param array       do_not_include  Any files to NOT include (optional)
      *
      * @return  bool        returns success
+     * @throws  Exception   If directory doesn't exist.
+     *
      */
-    public static function includeDirectory(string $directory, array $do_not_include = [])
+    public static function includeDirectory(string $directory, array $do_not_include = []): bool
     {
         if (file_exists($directory)) {
             $include_data = [];
@@ -41,7 +41,8 @@ class Loader
                 }
             }
         } else {
-            throw new Exception($directory . ' does not exist or is inaccessible.');
+            return false;
         }
+        return true;
     }
 }

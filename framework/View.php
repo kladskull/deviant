@@ -22,8 +22,8 @@ use Smarty;
 class View
 {
     public $smarty;
-    protected $_base_path;
-    protected $_currentUser = null;
+    protected string $_base_path;
+    protected ?\Deviant\Models\User $_currentUser = null;
 
     public function __construct()
     {

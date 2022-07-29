@@ -10,7 +10,7 @@ namespace Deviant\Framework;
 
 class Route
 {
-    protected $sslEnabled;
+    protected bool $sslEnabled;
 
     public function __construct()
     {
@@ -34,7 +34,7 @@ class Route
     /**
      * @return mixed
      */
-    protected function getSslEnabled()
+    protected function getSslEnabled(): bool
     {
         return $this->sslEnabled;
     }
@@ -42,7 +42,7 @@ class Route
     /**
      * @param mixed $sslEnabled
      */
-    protected function setSslEnabled($sslEnabled)
+    protected function setSslEnabled(bool $sslEnabled): void
     {
         $this->sslEnabled = $sslEnabled;
     }

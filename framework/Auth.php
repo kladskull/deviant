@@ -151,7 +151,7 @@ class Auth
         return true;
     }
 
-    public static function isAdmin()
+    public static function isAdmin(): bool
     {
         if (self::isLoggedIn()) {
             if (Auth::getLoggedInUserId()) {

@@ -24,7 +24,7 @@ use Exception;
  */
 class Cache
 {
-    public static function get($key, $default_value = null)
+    public static function get($key, $default_value = null): string
     {
         $return_value = null;
         $record = DB::queryFullColumns('SELECT `value`, `expires` FROM `cache` WHERE `key`=%s LIMIT 1;', $key);
@@ -44,7 +44,7 @@ class Cache
         return $return_value;
     }
 
-    public static function set($key, $value, $expires = 0)
+    public static function set($key, $value, $expires = 0): void
     {
         // never expire
         if ($expires < 31536000 && 0 !== $expires) {
@@ -58,8 +58,8 @@ class Cache
 
         // update the record
         DB::insertUpdate('cache', [
-            'key'     => $key,
-            'value'   => $value,
+            'key' => $key,
+            'value' => $value,
             'expires' => $expires,
         ]);
     }

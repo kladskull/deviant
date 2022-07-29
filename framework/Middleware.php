@@ -84,7 +84,7 @@ class Middleware
         }
     }
 
-    private function removeUniquePostId()
+    private function removeUniquePostId(): void
     {
         $formUniqueName = hash('sha256',
             getenv('APP_SECRET') . session_id());

@@ -4,8 +4,6 @@
 
 namespace Deviant\Framework;
 
-use Deviant\Controllers;
-
 /**
  * Http Kernel Class
  *

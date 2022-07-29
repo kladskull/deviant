@@ -17,7 +17,7 @@ namespace Deviant\Framework;
  */
 class Headers
 {
-    protected $headers = [];
+    protected array $headers = [];
 
     public function __construct()
     {

@@ -20,9 +20,21 @@ class Validate
 {
     public static function emailAddress(string $emailAddress): bool
     {
+        $tokens = explode('@', $emailAddress);
+        if (count($tokens) < 2) {
+            return false;
+        }
+
+        if (strlen($tokens[0]) > 64) {
+            return false;
+        }
+
+        if (strlen($tokens[1]) > 255) {
+            return false;
+        }
+
         // ensure we have a valid email address
-        if (strlen($emailAddress) > 150 ||
-            !filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) {
             return false;
         }
 

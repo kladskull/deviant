@@ -8,6 +8,7 @@ use DateTime;
 use DB;
 use Exception;
 use MeekroDBException;
+use Monolog\Logger;
 use Monolog\Registry;
 
 /**
@@ -24,13 +25,13 @@ use Monolog\Registry;
  */
 class Base
 {
-    protected $_fields = [];
-    protected $_properties = [];
-    protected $_modified = [];
-    protected $_table_name = null;
-    protected $_class_name = '';
-    protected $logger = null;
-    protected $skip_database;
+    protected array $_fields = [];
+    protected array $_properties = [];
+    protected array $_modified = [];
+    protected string|null $_table_name = null;
+    protected string $_class_name = '';
+    protected Logger|null $logger = null;
+    protected bool $skip_database;
 
     /**
      * Constructor
@@ -103,7 +104,7 @@ class Base
         }
     }
 
-    private function loadProperties(string $table_name): bool
+    private function loadProperties(string $table_name): void
     {
         // standardize the table name
         $table_name = trim(strtolower($table_name));
@@ -122,7 +123,6 @@ class Base
             $this->_table_name = null;
         }
 
-        return $found;
     }
 
     protected function getSignableData(): array
@@ -178,13 +178,14 @@ class Base
         return $id;
     }
 
-    public function loadByField($field, $key): bool
+    public function loadByField($field, $key): int
     {
+        $id = 0;
         if (isset($this->_properties[$field])) {
 
             if ($field == 'id') {
                 if (!Validate::recordId($key)) {
-                    return false;
+                    return $id;
                 }
             }
 
@@ -280,13 +281,13 @@ class Base
         return (int)$fields['total'];
     }
 
-    public function get($id)
+    public function get($id): array
     {
         // get all data records
         return DB::query('SELECT * FROM `' . $this->_table_name . '` WHERE `id`=%i', $id);
     }
 
-    public function getAll($id = null)
+    public function getAll($id = null): array
     {
         if ($id !== null) {
             // get all data records

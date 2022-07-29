@@ -4,6 +4,8 @@
 
 namespace Deviant\Framework;
 
+use JetBrains\PhpStorm\NoReturn;
+
 /**
  * Http Class
  *
@@ -17,7 +19,8 @@ namespace Deviant\Framework;
  */
 class Http
 {
-    public static function redirect($url)
+    #[NoReturn]
+    public static function redirect($url): void
     {
         header('Status: 302');
         header('Location: ' . $url);

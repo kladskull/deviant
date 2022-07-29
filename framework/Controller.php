@@ -20,9 +20,9 @@ use Monolog\Registry;
  */
 class Controller
 {
-    public $view;
+    public View $view;
     protected $middleware;
-    protected $logger = null;
+    protected Logger $logger;
 
     public $requestVars = [];
     public $menuArray = [];
